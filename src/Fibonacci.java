@@ -1,7 +1,10 @@
-import java.math.BigInteger;
+import java.util.Arrays;
 
 public class Fibonacci {
     public static void main(String[] args) {
+        int n = 100;
+        long[] mem = new long[n + 1];
+        Arrays.fill(mem, -1);
         System.out.println(fibEffective(1000));
     }
 
@@ -10,6 +13,14 @@ public class Fibonacci {
         if (n <= 1)
             return n;
         return fibNative(n - 1) + fibNative(n - 2);
+    }
+
+    //Aлгоритм c мемоизацией
+    private static long fibNativeEff(int n, long[] mem) {
+        if (mem[n] != -1) return mem[n];
+        if (n <= 1) return n;
+        long result = fibNativeEff(n - 1, mem) + fibNativeEff(n - 2, mem);
+        return result;
     }
 
     //Эффективный алгоритм
